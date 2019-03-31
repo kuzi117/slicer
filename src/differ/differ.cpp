@@ -52,5 +52,13 @@ int main(int argc, char **argv) {
   Engine.diff(LModule.get(), RModule.get());
   Consumer.printFunctions();
 
+  // A bit hacky. Too much modifying of difference engine is necessary if we want to have "new"
+  // functions be considered diffs. Instead, just do it here. The effect is the same.
+  for (const Function &f : *RModule) {
+    StringRef name = f.getName();
+    if (LModule->getFunction(name) == nullptr)
+      outs() << name << '\n';
+  }
+
   return 0;
 }
