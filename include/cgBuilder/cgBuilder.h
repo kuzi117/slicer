@@ -58,7 +58,7 @@ public:
 
 private:
   void trackCalls(const llvm::Module &m);
-  void trackTests();
+  void trackTests(const llvm::Module &m);
 
 };
 
